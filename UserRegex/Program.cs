@@ -3,17 +3,25 @@ using System.Text.RegularExpressions;
 
 namespace UserRegex
 {
-    class Program
+    public class Program
     {
         public static string REGEX_PATTERN = "^[A-Z]{1}[a-zA-Z]{2,}";
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome_To_UserRegistration_RegeEx");
+            Console.WriteLine("Welcome To User Registration Regex Program!");
             FirstNameVal();
             LastNameVal();
             EmailValidation();
             MobileValidation();
             PasswordRule();
+
+            SampleEmails sampleEmails = new SampleEmails();
+            if (sampleEmails.ValidateEmail("abc@gmail.com.com"))
+            {
+                Console.WriteLine("The Sample Email is Valid");
+            }
+            else
+                Console.WriteLine("The Sample Email is Invalid");
         }
         public static void FirstNameVal()
         {
@@ -70,6 +78,14 @@ namespace UserRegex
             bool validate = rg.IsMatch(password);
             Console.WriteLine(validate);
         }
+        public class SampleEmails
+        {
+            public static string REGEX_SampleEmails = "^[0-9A-Za-z]+([._+-][0-9A-Za-z]+)*[@][0-9A-Za-z]+.[a-zA-Z]{2,3}(.[a-zA-Z]{2,3})?$";
 
+            public bool ValidateEmail(string email)
+            {
+                return Regex.IsMatch(email, REGEX_SampleEmails);
+            }
+        }
     }
 }
